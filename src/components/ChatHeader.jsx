@@ -1,18 +1,14 @@
 
-import { Typography, Button, Space, Tooltip, Badge, Divider } from "antd";
+import React from "react";
+import { Typography, Button, Space, Tooltip, Badge } from "antd";
 import { 
   PhoneOutlined, 
   VideoCameraOutlined, 
   InfoCircleOutlined,
   MoreOutlined
 } from "@ant-design/icons";
-import { Customer } from "@/types/customer";
 
-interface ChatHeaderProps {
-  customer: Customer;
-}
-
-export function ChatHeader({ customer }: ChatHeaderProps) {
+export function ChatHeader({ customer }) {
   return (
     <div style={{ 
       padding: "16px", 

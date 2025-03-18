@@ -1,20 +1,13 @@
 
+import React, { useState } from "react";
 import { Input, List, Typography, Badge, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { Customer } from "@/types/customer";
-import { useState } from "react";
-
-interface ContactSidebarProps {
-  customers: Customer[];
-  selectedCustomerId: string | undefined;
-  onSelectCustomer: (customer: Customer) => void;
-}
 
 export function ContactSidebar({
   customers,
   selectedCustomerId,
   onSelectCustomer,
-}: ContactSidebarProps) {
+}) {
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredCustomers = customers.filter((customer) =>

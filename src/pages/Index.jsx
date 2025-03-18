@@ -3,7 +3,7 @@ import React from "react";
 import ContactCenterLayout from "../components/ContactCenterLayout";
 import { ConfigProvider } from "antd";
 
-const Index: React.FC = () => {
+const Index = () => {
   return (
     <ConfigProvider>
       <ContactCenterLayout />

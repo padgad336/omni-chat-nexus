@@ -1,21 +1,20 @@
 
 import React, { useState } from "react";
 import { Layout, theme } from "antd";
-import { Customer } from "../types/customer";
 import { customers } from "../data/customers";
 import { ChatArea } from "./ChatArea";
 import { ContactSidebar } from "./ContactSidebar";
 
 const { Content, Sider } = Layout;
 
-const ContactCenterLayout: React.FC = () => {
-  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
+const ContactCenterLayout = () => {
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const handleSelectCustomer = (customer: Customer) => {
+  const handleSelectCustomer = (customer) => {
     setSelectedCustomer(customer);
   };
 

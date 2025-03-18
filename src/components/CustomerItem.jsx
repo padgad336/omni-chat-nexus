@@ -1,22 +1,14 @@
 
-import React, { ReactNode } from "react";
-import { Customer } from "../types/customer";
+import React from "react";
 import { cn } from "../lib/utils";
 import { Badge } from "../components/ui/badge";
-
-interface CustomerItemProps {
-  customer: Customer;
-  isSelected: boolean;
-  onSelect: () => void;
-  channelIcon: ReactNode;
-}
 
 export function CustomerItem({ 
   customer, 
   isSelected, 
   onSelect,
   channelIcon
-}: CustomerItemProps) {
+}) {
   return (
     <div 
       className={cn(
