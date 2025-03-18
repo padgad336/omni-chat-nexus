@@ -1,21 +1,28 @@
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { List, Avatar, Typography, Space } from "antd";
 import { CheckOutlined, CheckCircleOutlined } from "@ant-design/icons";
+import { Message } from "@/types/message";
+import { Customer } from "@/types/customer";
 import { format } from "date-fns";
 
-export function ChatMessages({ messages, customer }) {
-  const messagesEndRef = useRef(null);
+interface ChatMessagesProps {
+  messages: Message[];
+  customer: Customer;
+}
+
+export function ChatMessages({ messages, customer }: ChatMessagesProps) {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const formatMessageTime = (timestamp) => {
+  const formatMessageTime = (timestamp: string) => {
     return format(new Date(timestamp), "h:mm a");
   };
 
-  const MessageStatusIcon = ({ status }) => {
+  const MessageStatusIcon = ({ status }: { status: Message["status"] }) => {
     switch (status) {
       case "sent":
         return <CheckOutlined style={{ fontSize: 12, color: "rgba(0,0,0,0.45)" }} />;

@@ -1,18 +1,24 @@
 
 import React, { useState } from "react";
 import { Empty, Card } from "antd";
+import { Customer } from "../types/customer";
 import { messages } from "../data/messages";
 import { ChatHeader } from "./ChatHeader";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
+import { Message } from "../types/message";
 
-export function ChatArea({ selectedCustomer }) {
-  const [chatMessages, setChatMessages] = useState(messages);
+interface ChatAreaProps {
+  selectedCustomer: Customer | null;
+}
 
-  const handleSendMessage = (text) => {
+export function ChatArea({ selectedCustomer }: ChatAreaProps) {
+  const [chatMessages, setChatMessages] = useState<Record<string, Message[]>>(messages);
+
+  const handleSendMessage = (text: string) => {
     if (!selectedCustomer) return;
 
-    const newMessage = {
+    const newMessage: Message = {
       id: `${selectedCustomer.id}-${Date.now()}`,
       text,
       timestamp: new Date().toISOString(),

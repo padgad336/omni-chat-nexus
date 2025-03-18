@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { 
   Input, 
   Button, 
@@ -16,7 +16,11 @@ import {
 
 const { TextArea } = Input;
 
-export function ChatInput({ onSendMessage }) {
+interface ChatInputProps {
+  onSendMessage: (text: string) => void;
+}
+
+export function ChatInput({ onSendMessage }: ChatInputProps) {
   const [message, setMessage] = useState("");
   const [form] = Form.useForm();
 
@@ -28,7 +32,7 @@ export function ChatInput({ onSendMessage }) {
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSubmit();
