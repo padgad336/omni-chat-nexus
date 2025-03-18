@@ -1,12 +1,12 @@
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Empty, Card } from "antd";
-import { Customer } from "@/types/customer";
-import { messages } from "@/data/messages";
+import { Customer } from "../types/customer";
+import { messages } from "../data/messages";
 import { ChatHeader } from "./ChatHeader";
 import { ChatMessages } from "./ChatMessages";
 import { ChatInput } from "./ChatInput";
-import { Message } from "@/types/message";
+import { Message } from "../types/message";
 
 interface ChatAreaProps {
   selectedCustomer: Customer | null;

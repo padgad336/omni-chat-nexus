@@ -1,8 +1,9 @@
 
-import ContactCenterLayout from "@/components/ContactCenterLayout";
+import React from "react";
+import ContactCenterLayout from "../components/ContactCenterLayout";
 import { ConfigProvider } from "antd";
 
-const Index = () => {
+const Index: React.FC = () => {
   return (
     <ConfigProvider>
       <ContactCenterLayout />

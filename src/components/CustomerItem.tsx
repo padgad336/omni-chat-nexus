@@ -1,8 +1,8 @@
 
-import { Customer } from "@/types/customer";
-import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
+import { Customer } from "../types/customer";
+import { cn } from "../lib/utils";
+import { Badge } from "../components/ui/badge";
 
 interface CustomerItemProps {
   customer: Customer;
