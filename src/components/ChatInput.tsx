@@ -1,13 +1,20 @@
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { 
-  Paperclip, 
-  Smile, 
-  Send,
-  MicIcon
-} from "lucide-react";
+  Input, 
+  Button, 
+  Space, 
+  Tooltip, 
+  Form
+} from "antd";
+import { 
+  SendOutlined, 
+  PaperClipOutlined, 
+  SmileOutlined,
+  AudioOutlined 
+} from "@ant-design/icons";
+
+const { TextArea } = Input;
 
 interface ChatInputProps {
   onSendMessage: (text: string) => void;
@@ -15,56 +22,65 @@ interface ChatInputProps {
 
 export function ChatInput({ onSendMessage }: ChatInputProps) {
   const [message, setMessage] = useState("");
+  const [form] = Form.useForm();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     if (message.trim()) {
       onSendMessage(message);
       setMessage("");
+      form.resetFields();
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSubmit(e);
+      handleSubmit();
     }
   };
 
   return (
-    <div className="border-t p-4 bg-white">
-      <form onSubmit={handleSubmit} className="flex items-end gap-2">
-        <Button type="button" variant="ghost" size="icon" className="flex-shrink-0">
-          <Paperclip className="h-5 w-5" />
-        </Button>
-        
-        <div className="relative flex-1">
-          <Textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Type your message..."
-            className="min-h-[60px] resize-none pr-24"
-          />
-          <div className="absolute bottom-2 right-2 flex items-center gap-1">
-            <Button type="button" variant="ghost" size="icon" className="h-8 w-8">
-              <Smile className="h-5 w-5" />
-            </Button>
-            <Button type="button" variant="ghost" size="icon" className="h-8 w-8">
-              <MicIcon className="h-5 w-5" />
-            </Button>
+    <div style={{ 
+      padding: "16px", 
+      backgroundColor: "#fff", 
+      borderTop: "1px solid #f0f0f0" 
+    }}>
+      <Form form={form} onFinish={handleSubmit}>
+        <Space.Compact style={{ width: "100%" }}>
+          <Form.Item name="message" style={{ flex: 1, marginBottom: 0 }}>
+            <TextArea
+              placeholder="Type your message..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={handleKeyDown}
+              autoSize={{ minRows: 1, maxRows: 4 }}
+              style={{ resize: "none", paddingRight: "60px" }}
+              bordered
+            />
+          </Form.Item>
+          <div style={{ display: "flex", marginLeft: "8px" }}>
+            <Tooltip title="Attach file">
+              <Button icon={<PaperClipOutlined />} />
+            </Tooltip>
+            <Tooltip title="Emoji">
+              <Button icon={<SmileOutlined />} />
+            </Tooltip>
+            <Tooltip title="Voice message">
+              <Button icon={<AudioOutlined />} />
+            </Tooltip>
+            <Tooltip title="Send">
+              <Button 
+                type="primary" 
+                icon={<SendOutlined />} 
+                onClick={handleSubmit}
+                disabled={!message.trim()}
+              >
+                Send
+              </Button>
+            </Tooltip>
           </div>
-        </div>
-        
-        <Button 
-          type="submit" 
-          className="flex-shrink-0" 
-          disabled={!message.trim()}
-        >
-          <Send className="h-5 w-5 mr-2" />
-          Send
-        </Button>
-      </form>
+        </Space.Compact>
+      </Form>
     </div>
   );
 }
